@@ -1,0 +1,60 @@
+<!-- Toolbar -->
+<mat-toolbar color="primary" class="app-header">
+  <!-- <div><a href="https://www.positronx.io" target="_blank" class="positronx">PositronX.io</a></div>
+    <span class="nav-tool-items">
+      <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
+      <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>
+    </span> -->
+  <span>Authentication App</span>
+  <span class="example-spacer"></span>
+  <!-- <span style="font-size: 14px;">{{firstName}} {{lastName}}</span> -->
+  <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button> -->
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+
+    <button mat-menu-item (click)="goToToDo()">
+      <mat-icon>task_alt</mat-icon>
+      <span>ToDo Tasks</span>
+    </button>
+
+    <button mat-menu-item (click)="goToEditProfile()">
+      <mat-icon>account_circle</mat-icon>
+      <span>Profile</span>
+    </button>
+
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+
+
+  </mat-menu>
+  <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Logout" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button> -->
+</mat-toolbar>
+<router-outlet></router-outlet>
+
+<!-- <div class="container" style="width:600px">
+    <div>
+      <h3>bezkoder.com</h3>
+      <h4>{{ title }}</h4>
+    </div>
+  
+    <div class="my-3">
+      <app-registration></app-registration>
+    </div> -->
+
+<app-loader></app-loader>
+
+
+<!-- <button (click)="getData()">Get Data</button>
+  
+  <ul *ngIf="users.length">
+    <li *ngFor="let user of users">{{ user }}</li>
+  </ul> -->
