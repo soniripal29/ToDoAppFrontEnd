@@ -1,1 +1,57 @@
-<p>to-do works!</p>
+<!-- <p>to-do works!</p> -->
+
+<div style="margin :1%;">
+    <div style="text-align: right;">
+
+        <button mat-raised-button color="primary" (click)="addTask()">
+            <mat-icon style="margin-bottom: 3%;margin-left: -5%;">add</mat-icon>Add Task
+        </button>
+    </div>
+
+    <div>
+        <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="All">
+                <div class="mat-elevation-z8 example-container">
+                    <table mat-table [dataSource]="dataSource">
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="task">
+                            <th mat-header-cell *matHeaderCellDef> Task </th>
+                            <td mat-cell *matCellDef="let element"> {{element.task}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="description">
+                            <th mat-header-cell *matHeaderCellDef> Description </th>
+                            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef> Status </th>
+                            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                        aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
+
+            </mat-tab>
+            <mat-tab label="Active">
+                <div>
+
+                </div>
+            </mat-tab>
+            <mat-tab label="Completed">
+                <div>
+
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

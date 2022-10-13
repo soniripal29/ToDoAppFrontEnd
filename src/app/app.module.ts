@@ -29,7 +29,8 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { AuthInterceptor } from './interceptor/auth-interceptor';
-import { ToDoComponent } from './components/to-do/to-do.component'
+import { ToDoComponent } from './components/to-do/to-do.component';
+import { AddTaskDialogComponent } from './components/add-task-dialog/add-task-dialog.component'
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ToDoComponent } from './components/to-do/to-do.component'
     LoginUserComponent,
     HomeComponent,
     ToDoComponent,
+    AddTaskDialogComponent,
   ],
   imports: [
     BrowserModule,
