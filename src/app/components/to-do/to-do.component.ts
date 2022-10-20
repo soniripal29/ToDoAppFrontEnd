@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { TodoService } from 'src/app/services/todo.service';
 import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.component'
 
 @Component({
@@ -12,7 +13,7 @@ import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.compo
 export class ToDoComponent implements OnInit,AfterViewInit {
 
   displayedColumns: string[] = ['task', 'description', 'status'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<PeriodicElement>([]);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -20,9 +21,14 @@ export class ToDoComponent implements OnInit,AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private todoService: TodoService) { }
 
   ngOnInit(): void {
+    this.dataSource.data = ELEMENT_DATA;
+      this.todoService.getAllTasks().subscribe((response)=>{
+        this.dataSource.data = response;
+        console.log(response);
+      })
   }
 
   addTask() {

@@ -189,6 +189,7 @@ export class HomeComponent implements OnInit {
     this.canEdit = false
     this.registrationService.getUserData().subscribe((response: any) => {
       console.log(response['data'][0]);
+      // localStorage.setItem("userId",)
       this.profileForm.patchValue(response['data'][0]);
       this.imageUrl = response['data'][0]['imageURL']
       console.log(this.imageUrl)

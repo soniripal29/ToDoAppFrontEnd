@@ -3,7 +3,7 @@
     <div>
         <mat-form-field appearance="legacy">
             <mat-label>Task</mat-label>
-            <input matInput>
+            <input matInput [(ngModel)]="task">
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
             <!-- <mat-hint>Hint</mat-hint> -->
         </mat-form-field>
@@ -13,7 +13,7 @@
     <div>
         <mat-form-field appearance="legacy">
             <mat-label>Task Description</mat-label>
-            <input matInput>
+            <input matInput [(ngModel)]="description" >
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
             <!-- <mat-hint>Hint</mat-hint> -->
         </mat-form-field>
@@ -22,5 +22,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Add</button>
+    <button mat-raised-button [mat-dialog-close]="true" (click)="addTasks()" cdkFocusInitial color="primary">Add</button>
 </mat-dialog-actions>
