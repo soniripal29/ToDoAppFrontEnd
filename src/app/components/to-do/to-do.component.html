@@ -9,7 +9,7 @@
     </div>
 
     <div>
-        <mat-tab-group mat-align-tabs="start">
+        <mat-tab-group mat-align-tabs="start" (selectedTabChange)="onTabChanged($event);">
             <mat-tab label="All">
                 <div class="mat-elevation-z8 example-container">
                     <table mat-table [dataSource]="dataSource">
@@ -36,7 +36,7 @@
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
 
-                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons #paginator
                         aria-label="Select page of periodic elements">
                     </mat-paginator>
                 </div>
@@ -76,7 +76,7 @@
                         <tr mat-row *matRowDef="let row; columns: displayedColumns_Completed;"></tr>
                     </table>
 
-                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons #paginator1
                         aria-label="Select page of periodic elements">
                     </mat-paginator>
                 </div>

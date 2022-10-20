@@ -15,10 +15,14 @@ export class ToDoComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['task', 'description', 'status'];
   displayedColumns_Completed: string[] = ['task', 'description', 'status', 'action'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  dataSource = new MatTableDataSource<PeriodicElement>([]);
+  dataSource = new MatTableDataSource<TaskElement>([]);
+  original_data: any;
 
-  @ViewChild(MatPaginator)
+  @ViewChild('paginator')
   paginator!: MatPaginator;
+
+  @ViewChild('paginator1')
+  paginator1!: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -26,11 +30,12 @@ export class ToDoComponent implements OnInit, AfterViewInit {
   constructor(public dialog: MatDialog, private todoService: TodoService) { }
 
   ngOnInit(): void {
-    this.dataSource.data = ELEMENT_DATA;
-      this.todoService.getAllTasks().subscribe((response)=>{
-        this.dataSource.data = response;
-        console.log(response);
-      })
+    // this.dataSource.data = ELEMENT_DATA;
+    this.todoService.getAllTasks().subscribe((response) => {
+      this.dataSource.data = response;
+      this.original_data = response;
+      console.log(response);
+    })
   }
 
   addTask() {
@@ -41,34 +46,56 @@ export class ToDoComponent implements OnInit, AfterViewInit {
     });
   }
 
+  onTabChanged($event: any) {
+    console.log($event.index);
+    if ($event.index == 0) {
+      this.dataSource.data = this.original_data
+      this.dataSource.paginator = this.paginator;
+    }
+    else if ($event.index == 1) {
+      let active_data = []
+      for (let data of this.original_data) {
+        if (data.status == 'active') {
+          active_data.push(data)
+        }
+      }
+      this.dataSource.data = active_data;
+      this.dataSource.paginator = this.paginator1;
+      console.log(this.dataSource.paginator)
+    }
+    else if ($event.indes == 2) {
+
+    }
+  }
+
 }
 
-export interface PeriodicElement {
+export interface TaskElement {
   task: string;
   description: string;
   status: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { task: "task1", description: 'task1', status: "Active" },
-  { task: "task2", description: 'task2', status: "Completed" },
-  { task: "task3", description: 'task3', status: "Active" },
-  { task: "task4", description: 'task4', status: "Completed" },
-  { task: "task5", description: 'task5', status: "Active" },
-  { task: "task6", description: 'task6', status: "Completed" },
-  { task: "task7", description: 'task7', status: "Active" },
-  { task: "task8", description: 'task8', status: "Completed" },
-  { task: "task9", description: 'task9', status: "Active" },
-  { task: "task10", description: 'task10', status: "Completed" },
-  { task: "task11", description: 'task11', status: "Active" },
-  { task: "task12", description: 'task12', status: "Completed" },
-  { task: "task13", description: 'task13', status: "Active" },
-  { task: "task14", description: 'task14', status: "Completed" },
-  { task: "task15", description: 'task15', status: "Active" },
-  { task: "task16", description: 'task16', status: "Completed" },
-  { task: "task17", description: 'task17', status: "Active" },
-  { task: "task18", description: 'task18', status: "Completed" },
-  { task: "task19", description: 'task19', status: "Active" },
-  { task: "task20", description: 'task20', status: "Completed" },
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   { task: "task1", description: 'task1', status: "Active" },
+//   { task: "task2", description: 'task2', status: "Completed" },
+//   { task: "task3", description: 'task3', status: "Active" },
+//   { task: "task4", description: 'task4', status: "Completed" },
+//   { task: "task5", description: 'task5', status: "Active" },
+//   { task: "task6", description: 'task6', status: "Completed" },
+//   { task: "task7", description: 'task7', status: "Active" },
+//   { task: "task8", description: 'task8', status: "Completed" },
+//   { task: "task9", description: 'task9', status: "Active" },
+//   { task: "task10", description: 'task10', status: "Completed" },
+//   { task: "task11", description: 'task11', status: "Active" },
+//   { task: "task12", description: 'task12', status: "Completed" },
+//   { task: "task13", description: 'task13', status: "Active" },
+//   { task: "task14", description: 'task14', status: "Completed" },
+//   { task: "task15", description: 'task15', status: "Active" },
+//   { task: "task16", description: 'task16', status: "Completed" },
+//   { task: "task17", description: 'task17', status: "Active" },
+//   { task: "task18", description: 'task18', status: "Completed" },
+//   { task: "task19", description: 'task19', status: "Active" },
+//   { task: "task20", description: 'task20', status: "Completed" },
 
-];
+// ];
