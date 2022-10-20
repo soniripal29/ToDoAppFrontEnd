@@ -43,14 +43,46 @@
 
             </mat-tab>
             <mat-tab label="Active">
-                <div>
+                <div class="mat-elevation-z8 example-container">
+                    <table mat-table [dataSource]="dataSource">
 
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="task">
+                            <th mat-header-cell *matHeaderCellDef> Task </th>
+                            <td mat-cell *matCellDef="let element"> {{element.task}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="description">
+                            <th mat-header-cell *matHeaderCellDef> Description </th>
+                            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef> Status </th>
+                            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-slide-toggle [checked]="element.status == 'Completed'">
+                                </mat-slide-toggle>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns_Completed; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns_Completed;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                        aria-label="Select page of periodic elements">
+                    </mat-paginator>
                 </div>
             </mat-tab>
             <mat-tab label="Completed">
-                <div>
-
-                </div>
+                <div></div>
             </mat-tab>
         </mat-tab-group>
     </div>
