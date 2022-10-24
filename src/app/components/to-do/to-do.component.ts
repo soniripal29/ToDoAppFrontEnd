@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild, ɵsetCurrentInjector } fro
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { map, switchMap, tap } from 'rxjs';
 import { TodoService } from 'src/app/services/todo.service';
 import { AddTaskDialogComponent } from '../add-task-dialog/add-task-dialog.component'
 
@@ -24,6 +25,9 @@ export class ToDoComponent implements OnInit, AfterViewInit {
   @ViewChild('paginator1')
   paginator1!: MatPaginator;
 
+  @ViewChild('paginator2')
+  paginator2!: MatPaginator;
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -31,6 +35,10 @@ export class ToDoComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // this.dataSource.data = ELEMENT_DATA;
+    this.getAllTask();
+  }
+
+  getAllTask() {
     this.todoService.getAllTasks().subscribe((response) => {
       this.dataSource.data = response;
       this.original_data = response;
@@ -43,6 +51,11 @@ export class ToDoComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      this.todoService.getAllTasks().subscribe((response) => {
+        this.dataSource.data = response;
+        this.original_data = response;
+        console.log(response);
+      })
     });
   }
 
@@ -51,17 +64,55 @@ export class ToDoComponent implements OnInit, AfterViewInit {
       _id: element._id
     };
     element.status = "deleted";
-    this.todoService.deleteTask(current).subscribe(res => {
-      this.onTabChanged({index: 2});
-    });
+    // this.todoService.deleteTask(current).subscribe(res => {
+    //   this.onTabChanged({ index: 2 });
+    // });
+    this.todoService.deleteTask(current).pipe(
+      map(response => response))
+      .subscribe(res => {
+        this.todoService.getAllTasks().subscribe((response) => {
+          this.dataSource.data = response;
+          this.original_data = response;
+          console.log(response);
+          this.onTabChanged({ index: 2 });
+        })
+      })
     console.log(element._id);
+  }
+
+  completeTask($event: any, element: any) {
+    if ($event.checked) {
+      const current = {
+        _id: element._id
+      };
+      element.status = "completed";
+
+      this.todoService.completeTask(current).pipe(
+        map(response => response))
+        .subscribe(res => {
+          this.todoService.getAllTasks().subscribe((response) => {
+            this.dataSource.data = response;
+            this.original_data = response;
+            console.log(response);
+            this.onTabChanged({ index: 1 });
+          })
+        })
+      console.log(element._id);
+    }
   }
 
   onTabChanged($event: any) {
     console.log($event.index);
     if ($event.index == 0) {
-      this.dataSource.data = this.original_data
-      this.dataSource.paginator = this.paginator;
+      // this.dataSource.data = this.original_data
+      // this.dataSource.paginator = this.paginator;
+      this.todoService.getAllTasks().subscribe((response) => {
+        this.dataSource.data = response;
+        this.original_data = response;
+        // this.dataSource.data = this.original_data
+        this.dataSource.paginator = this.paginator;
+        console.log(response);
+      })
     }
     else if ($event.index == 1) {
       let active_data = []
@@ -82,7 +133,7 @@ export class ToDoComponent implements OnInit, AfterViewInit {
         }
       }
       this.dataSource.data = active_data;
-      this.dataSource.paginator = this.paginator1;
+      this.dataSource.paginator = this.paginator2;
       console.log(this.dataSource.paginator)
     }
   }
