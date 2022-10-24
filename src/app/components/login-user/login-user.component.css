@@ -1,0 +1,249 @@
+.login-page {
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* background-color: ; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+mat-card {
+  width: 30%;
+  margin: 10% auto;
+  border-radius: 8px;
+}
+mat-form-field, mat-checkbox {
+  width: 100%;
+  /* display: block; */
+  /* margin: auto; */
+}
+mat-card-content {
+  margin-top: 20px;
+}
+
+.login-button {
+  margin-top: 20px;
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Muli:200,300,400,600');
+
+body {
+  font-family: 'Muli', sans-serif;
+  background: #F5F5F6;
+}
+
+.jumbotron {
+  padding: 20px 2rem 27px;
+  background: #312BC6;
+  margin: 0 auto 25px;
+  border-radius: 0;
+}
+
+.h1,
+h1 {
+  font-size: 25px;
+  color: #4EABE6;
+  font-weight: 300;
+  margin: 0;
+}
+
+h5 {
+  font-weight: 600;
+}
+
+.custom-wrapper {
+  max-width: 460px;
+  margin: 0 auto 150px;
+}
+
+.h2,
+h2 {
+  font-size: 1.45rem;
+}
+
+label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.btn.focus,
+.btn:focus,
+.form-control:focus,
+.custom-select:focus,
+.custom-select:focus {
+  box-shadow: none;
+}
+
+.form-control:focus,
+.custom-select:focus {
+  border: 1px solid #0C1CFF;
+}
+
+
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 19px;
+  z-index: 1;
+  top: 13px;
+}
+
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+
+.avatar-upload .avatar-edit .custom-label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #3efc78;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+
+.avatar-upload .avatar-edit .upload-image {
+  background: #3efc78;
+}
+
+.avatar-upload .avatar-edit .remove-image {
+  background: #E91E63;
+}
+
+.avatar-upload .avatar-edit .custom-label:hover {
+  opacity: 1;
+}
+
+.avatar-upload .avatar-edit .custom-label:after {
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  top: 8px;
+  right: 0;
+  left: 2px;
+  width: 18px;
+}
+
+.avatar-upload .avatar-edit .upload-image:after {
+  content: url('/assets/edit.svg');
+}
+
+.avatar-upload .avatar-edit .remove-image:after {
+  content: url('/assets/close.svg');
+  left: 0px !important;
+}
+
+.avatar-upload .avatar-preview {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 100%;
+  overflow: hidden;
+  border: 3px solid #673ab7;
+  margin: auto;
+  /* -webkit-box-shadow: 0 0 45px rgba(0, 0, 0, .2);
+  -moz-box-shadow: 0 0 45px rgba(0, 0, 0, .2); */
+  /* box-shadow: 0 0 45px rgba(0, 0, 0, .2); */
+}
+
+.avatar-upload .avatar-preview>div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.form-control {
+  height: auto;
+  padding: 15px;
+  font-size: 14px;
+  color: #222222;
+  border-radius: 0;
+  background: #FDFDFD;
+  border: 1px solid #312BC6;
+}
+
+.custom-select {
+  height: auto;
+  padding: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 400;
+  color: #222222;
+  background-color: #FDFDFD;
+  border: 1px solid #312BC6;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  border-color: #E91E63;
+  background-color: #E91E63;
+}
+
+.custom-control-input:focus~.custom-control-label::before {
+  box-shadow: none;
+}
+
+.custom-control-label {
+  cursor: pointer;
+}
+
+.error:focus,
+.error {
+  border-color: #E91E63;
+  color: #E91E63;
+}
+
+.invalid-feedback {
+  color: #E91E63;
+}
+
+.btn-danger,
+body .btn-danger:hover {
+  background: #E91E63;
+  border-color: #E91E63;
+  color: white;
+}
+
+.subjectList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.subjectList li {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.invalid-feedback {
+  display: block;
+}
+
+.mb-3,
+.my-3 {
+  margin-bottom: 15px !important;
+}
+
+.custom-control {
+  margin-bottom: 5px;
+}
+
+.custom-control label {
+  font-weight: 400;
+}

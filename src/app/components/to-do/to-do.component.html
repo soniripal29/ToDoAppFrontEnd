@@ -1,0 +1,132 @@
+<!-- <p>to-do works!</p> -->
+
+<div style="margin :1%;">
+    <div style="text-align: right;">
+
+        <button mat-raised-button color="primary" (click)="addTask()">
+            <mat-icon style="margin-bottom: 3%;margin-left: -5%;">add</mat-icon>Add Task
+        </button>
+    </div>
+
+    <div>
+        <mat-tab-group mat-align-tabs="start" (selectedTabChange)="onTabChanged($event);">
+            <mat-tab label="All">
+                <div class="mat-elevation-z8 example-container">
+                    <table mat-table [dataSource]="dataSource">
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="task">
+                            <th mat-header-cell *matHeaderCellDef> Task </th>
+                            <td mat-cell *matCellDef="let element"> {{element.task}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="description">
+                            <th mat-header-cell *matHeaderCellDef> Description </th>
+                            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef> Status </th>
+                            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons #paginator
+                        aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
+
+            </mat-tab>
+            <mat-tab label="Active">
+                <div class="mat-elevation-z8 example-container" *ngIf="dataSource.data.length > 0">
+                    <table mat-table [dataSource]="dataSource">
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="task">
+                            <th mat-header-cell *matHeaderCellDef> Task </th>
+                            <td mat-cell *matCellDef="let element"> {{element.task}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="description">
+                            <th mat-header-cell *matHeaderCellDef> Description </th>
+                            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef> Status </th>
+                            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-slide-toggle [checked]="element.status == 'Completed'"
+                                    (change)="completeTask($event,element)">
+                                </mat-slide-toggle>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns_Completed; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns_Completed;"></tr>
+                    </table>
+
+                    <mat-paginator *ngIf="dataSource.data.length > 0" [pageSizeOptions]="[5, 10, 20]"
+                        showFirstLastButtons #paginator1 aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
+                <div *ngIf="dataSource.data.length <=0" style="padding: 5% 0%;text-align: center">
+                    No Active Tasks
+                </div>
+            </mat-tab>
+            <mat-tab label="Completed">
+                <div class="mat-elevation-z8 example-container">
+                    <table mat-table [dataSource]="dataSource">
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="task">
+                            <th mat-header-cell *matHeaderCellDef> Task </th>
+                            <td mat-cell *matCellDef="let element"> {{element.task}} </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="description">
+                            <th mat-header-cell *matHeaderCellDef> Description </th>
+                            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef> Status </th>
+                            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element">
+                                <!-- <mat-slide-toggle (click)="deleteTask(element)" [checked]="element.status == 'Deleted'">
+                                </mat-slide-toggle> -->
+                                <button mat-mini-fab color="primary" (click)="deleteTask(element)">
+                                    <mat-icon style="margin-bottom: 3%;margin-left: -5%;">delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns_Completed; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns_Completed;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons #paginator2
+                        aria-label="Select page of periodic elements">
+                    </mat-paginator>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
