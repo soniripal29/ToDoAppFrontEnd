@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ɵsetCurrentInjector } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -46,6 +46,17 @@ export class ToDoComponent implements OnInit, AfterViewInit {
     });
   }
 
+  deleteTask(element: any) {
+    const current = {
+      _id: element._id
+    };
+    element.status = "deleted";
+    this.todoService.deleteTask(current).subscribe(res => {
+      this.onTabChanged({index: 2});
+    });
+    console.log(element._id);
+  }
+
   onTabChanged($event: any) {
     console.log($event.index);
     if ($event.index == 0) {
@@ -63,8 +74,16 @@ export class ToDoComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator = this.paginator1;
       console.log(this.dataSource.paginator)
     }
-    else if ($event.indes == 2) {
-
+    else if ($event.index == 2) {
+      let active_data = []
+      for (let data of this.original_data) {
+        if (data.status == 'complete') {
+          active_data.push(data)
+        }
+      }
+      this.dataSource.data = active_data;
+      this.dataSource.paginator = this.paginator1;
+      console.log(this.dataSource.paginator)
     }
   }
 

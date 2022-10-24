@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class TodoService {
   getdataUrl = 'https://todoapp25.herokuapp.com/task/';
-  addTaskUrl = 'https://todoapp25.herokuapp.com/task/add'
+  addTaskUrl = 'https://todoapp25.herokuapp.com/task/add';
+  deleteTaskUrl = 'https://todoapp25.herokuapp.com/task/delete'
 
   constructor(private http: HttpClient) { }
 
@@ -17,5 +18,9 @@ export class TodoService {
 
   addTask(task: any): Observable<any>{
     return this.http.post(this.addTaskUrl, task);
+  }
+
+  deleteTask(id: any): Observable<any>{
+    return this.http.post(this.deleteTaskUrl, id);
   }
 }
