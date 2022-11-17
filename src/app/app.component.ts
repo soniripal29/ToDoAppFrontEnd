@@ -43,4 +43,8 @@ export class AppComponent {
   goToToDo() {
     this.router.navigate(['/to-do']);
   }
+
+  goToUnsplash() {
+    this.router.navigate(['/unsplash']);
+  }
 }
