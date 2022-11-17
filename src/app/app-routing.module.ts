@@ -4,6 +4,7 @@ import { LoginUserComponent } from './components/login-user/login-user.component
 import { HomeComponent } from '../app/components/home/home.component';
 import { AuthGuard } from './auth/auth.guard'
 import { ToDoComponent } from './components/to-do/to-do.component'
+import { UnsplashComponent } from './components/unsplash/unsplash.component';
 
 const routes: Routes = [
   // {
@@ -23,7 +24,8 @@ const routes: Routes = [
   // ,
   { path: 'login', component: LoginUserComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'to-do', component: ToDoComponent, canActivate: [AuthGuard] }
+  { path: 'to-do', component: ToDoComponent, canActivate: [AuthGuard] },
+  { path: 'unsplash', component: UnsplashComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

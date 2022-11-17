@@ -30,7 +30,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { AuthInterceptor } from './interceptor/auth-interceptor';
 import { ToDoComponent } from './components/to-do/to-do.component';
-import { AddTaskDialogComponent } from './components/add-task-dialog/add-task-dialog.component'
+import { AddTaskDialogComponent } from './components/add-task-dialog/add-task-dialog.component';
+import { UnsplashComponent } from './components/unsplash/unsplash.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AddTaskDialogComponent } from './components/add-task-dialog/add-task-di
     HomeComponent,
     ToDoComponent,
     AddTaskDialogComponent,
+    UnsplashComponent,
   ],
   imports: [
     BrowserModule,
